@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComponentFactory.cs" />
+    <Compile Include="FileIO.cs" />
     <Compile Include="HTML\HTMLButtonFactory.cs" />
     <Compile Include="HTML\HTMLTextAreaFactory.cs" />
     <Compile Include="HTML\HTMLLabelFactory.cs" />
