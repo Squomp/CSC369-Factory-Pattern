@@ -27,5 +27,10 @@ namespace FactoryLibrary.HTML
                 $"<textarea>";
             return code;
         }
+
+        public override string ToString()
+        {
+            return "HTML TextArea";
+        }
     }
 }

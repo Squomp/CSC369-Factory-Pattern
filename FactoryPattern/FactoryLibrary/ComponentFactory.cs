@@ -15,5 +15,7 @@ namespace FactoryLibrary
         public string Content { get; set; }
 
         abstract public string GenerateCode();
+
+        public abstract override string ToString();
     }
 }

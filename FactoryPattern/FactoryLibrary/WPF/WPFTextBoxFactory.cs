@@ -25,5 +25,10 @@ namespace FactoryLibrary.WPF
                 $"Margin=\"{LeftMargin} {TopMargin} 0 0\"/>";
             return code;
         }
+
+        public override string ToString()
+        {
+            return "WPF TextBox";
+        }
     }
 }

@@ -26,6 +26,9 @@ namespace FactoryLibrary.WPF
             return code;
         }
 
-
+        public override string ToString()
+        {
+            return "WPF Label";
+        }
     }
 }

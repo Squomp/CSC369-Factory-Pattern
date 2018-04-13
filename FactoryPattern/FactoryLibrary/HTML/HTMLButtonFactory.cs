@@ -27,5 +27,10 @@ namespace FactoryLibrary.HTML
                 $"Margin=\"{TopMargin}px 0px 0px {LeftMargin}px\">";
             return code;
         }
+
+        public override string ToString()
+        {
+            return "HTML Button";
+        }
     }
 }

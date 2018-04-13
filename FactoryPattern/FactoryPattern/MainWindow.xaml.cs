@@ -1,19 +1,11 @@
-﻿using System;
+﻿using FactoryLibrary;
+using FactoryLibrary.HTML;
+using FactoryLibrary.WPF;
+using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Markup;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FactoryPattern
 {
@@ -22,38 +14,93 @@ namespace FactoryPattern
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<ComponentFactory> Components = new List<ComponentFactory>();
+
         public MainWindow()
         {
             InitializeComponent();
+            SetComboBoxBinding();
         }
 
-        public static void WriteAndRunHTML(string componentCode)
+        private void SetComboBoxBinding()
         {
-            string path = "code.html";
-            using (StreamWriter w = new StreamWriter(path))
-            {
-                w.Write(componentCode);
-            }
-            System.Diagnostics.Process.Start(path);
+            Language.ItemsSource = Enum.GetValues(typeof(Languages)).Cast<Languages>();
         }
 
-        public static void WriteAndRunXAML(string componentCode)
+        private void SetListBoxBinding()
         {
-            string path = "code.xaml";
-            using (StreamWriter w = new StreamWriter(path))
-            {
-                w.Write(componentCode);
-            }
+            ComponentList.ItemsSource = Components;
+        }
 
-            UIElement root;
-            using (FileStream s = new FileStream(path, FileMode.Open))
+        private void Language_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Components = new List<ComponentFactory>();
+            switch (Language.SelectedItem)
             {
-                root = (UIElement)XamlReader.Load(s);
+                case Languages.HTML:
+                    Component.ItemsSource = Enum.GetValues(typeof(HTMLComponents)).Cast<HTMLComponents>();
+                    break;
+                case Languages.WPF:
+                    Component.ItemsSource = Enum.GetValues(typeof(WPFComponents)).Cast<WPFComponents>();
+                    break;
+                default:
+                    break;
             }
+        }
 
-            ChildWindow child = new ChildWindow();
-            child.Preview = (Grid)root;
-            child.ShowDialog();
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            int height = Int32.Parse(Height.Text);
+            int width = Int32.Parse(Width.Text);
+            int left = Int32.Parse(Left.Text);
+            int top = Int32.Parse(Top.Text);
+            string content = Content.Text;
+            if (Language.SelectedItem.Equals(Languages.HTML))
+            {
+                switch (Component.SelectedItem)
+                {
+                    case HTMLComponents.TextArea:
+                        Components.Add(new HTMLTextAreaFactory(height, width, left, top, content));
+                        break;
+                    case HTMLComponents.TextBox:
+                        Components.Add(new HTMLTextBoxFactory(height, width, left, top, content));
+                        break;
+                    case HTMLComponents.Label:
+                        Components.Add(new HTMLLabelFactory(height, width, left, top, content));
+                        break;
+                    case HTMLComponents.Button:
+                        Components.Add(new HTMLButtonFactory(height, width, left, top, content));
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if (Language.SelectedItem.Equals(Languages.WPF))
+            {
+                switch (Component.SelectedItem)
+                {
+                    case WPFComponents.Label:
+                        Components.Add(new WPFLabelFactory(height, width, left, top, content));
+                        break;
+                    case WPFComponents.TextBox:
+                        Components.Add(new WPFTextBoxFactory(height, width, left, top, content));
+                        break;
+                    default:
+                        break;
+                }
+            }
+            ComponentList.ItemsSource = Components;
+        }
+
+        private void RemoveButton_Click(object sender, RoutedEventArgs e)
+        {
+            Components.RemoveAt(Components.Count - 1);
+            ComponentList.ItemsSource = Components;
+        }
+
+        private void GenerateButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
