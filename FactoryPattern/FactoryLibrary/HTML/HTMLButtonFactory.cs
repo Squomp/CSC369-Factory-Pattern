@@ -21,10 +21,9 @@ namespace FactoryLibrary.HTML
         {
             string code = $"<button " +
                 $"type=\"button\"" +
-                $"value=\"{Content}\" " +
-                $"Height=\"{Height}px\" " +
-                $"Width=\"{Width}px\" " +
-                $"Margin=\"{TopMargin}px 0px 0px {LeftMargin}px\">";
+                $"style=\"Height:{Height}px;Width:{Width}px\" " +
+                $"Margin=\"{TopMargin}px 0px 0px {LeftMargin}px\">" +
+                $"{Content}</button>";
             return code;
         }
 

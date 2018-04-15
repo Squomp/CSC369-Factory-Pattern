@@ -19,7 +19,8 @@ namespace FactoryLibrary.WPF
 
         public override string GenerateCode()
         {
-            string code = $"<TextBox Text=\"{Content}\" " +
+            string code = $"<TextBox " +
+                $"Text=\"{Content}\" " +
                 $"Height=\"{Height}\" " +
                 $"Width=\"{Width}\" " +
                 $"Margin=\"{LeftMargin} {TopMargin} 0 0\"/>";

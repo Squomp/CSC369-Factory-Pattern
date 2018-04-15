@@ -3,6 +3,7 @@ using FactoryLibrary.HTML;
 using FactoryLibrary.WPF;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,7 +15,8 @@ namespace FactoryPattern
     /// </summary>
     public partial class MainWindow : Window
     {
-        private List<ComponentFactory> Components = new List<ComponentFactory>();
+        private ObservableCollection<ComponentFactory> Components = new ObservableCollection<ComponentFactory>();
+        private string codeToSave = "";
 
         public MainWindow()
         {
@@ -34,7 +36,7 @@ namespace FactoryPattern
 
         private void Language_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Components = new List<ComponentFactory>();
+            Components = new ObservableCollection<ComponentFactory>();
             switch (Language.SelectedItem)
             {
                 case Languages.HTML:
@@ -46,6 +48,7 @@ namespace FactoryPattern
                 default:
                     break;
             }
+            codeToSave = "";
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
@@ -94,13 +97,32 @@ namespace FactoryPattern
 
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
-            Components.RemoveAt(Components.Count - 1);
-            ComponentList.ItemsSource = Components;
+            if (Components.Count > 0)
+            {
+                Components.RemoveAt(Components.Count - 1);
+            }
         }
 
         private void GenerateButton_Click(object sender, RoutedEventArgs e)
         {
-
+            switch (Language.SelectedItem)
+            {
+                case Languages.HTML:
+                    codeToSave += TheExecutioner.StartHTML();
+                    Components.ToList().ForEach(x => codeToSave += x.GenerateCode());
+                    codeToSave += TheExecutioner.EndHTML();
+                    TheExecutioner.WriteAndRunHTML(codeToSave);
+                    break;
+                case Languages.WPF:
+                    codeToSave += TheExecutioner.StartWPF();
+                    Components.ToList().ForEach(x => codeToSave += x.GenerateCode());
+                    codeToSave += TheExecutioner.EndWPF();
+                    TheExecutioner.WriteAndRunXAML(codeToSave);
+                    break;
+                default:
+                    break;
+            }
+            codeToSave = "";
         }
     }
 }

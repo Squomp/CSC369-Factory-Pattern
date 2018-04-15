@@ -20,10 +20,10 @@ namespace FactoryLibrary.HTML
         public override string GenerateCode()
         {
             string code = $"<label " +
-                $"value=\"{Content}\" " +
                 $"Height=\"{Height}px\" " +
                 $"Width=\"{Width}px\" " +
-                $"Margin=\"{TopMargin}px 0px 0px {LeftMargin}px\">";
+                $"Margin=\"{TopMargin}px 0px 0px {LeftMargin}px\">" +
+                $"{Content}</label>";
             return code;
         }
 

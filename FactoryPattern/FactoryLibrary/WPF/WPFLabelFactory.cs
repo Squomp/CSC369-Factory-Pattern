@@ -19,10 +19,11 @@ namespace FactoryLibrary.WPF
 
         public override string GenerateCode()
         {
-            string code = $"<Label Content=\"{Content}\" " +
+            string code = $"<Label " +
                 $"Height=\"{Height}\" " +
                 $"Width=\"{Width}\" " +
-                $"Margin=\"{LeftMargin} {TopMargin} 0 0\"/>";
+                $"Margin=\"{LeftMargin} {TopMargin} 0 0\">" +
+                $"{Content}</Label>";
             return code;
         }
 

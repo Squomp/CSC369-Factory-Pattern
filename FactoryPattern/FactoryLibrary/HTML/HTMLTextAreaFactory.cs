@@ -24,7 +24,7 @@ namespace FactoryLibrary.HTML
                 $"cols=\"{Width}px\" " +
                 $"Margin=\"{TopMargin}px 0px 0px {LeftMargin}px\">" +
                 $"{Content}" +
-                $"<textarea>";
+                $"</textarea>";
             return code;
         }
 

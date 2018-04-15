@@ -30,15 +30,35 @@ namespace FactoryPattern
                 w.Write(componentCode);
             }
 
-            UIElement root;
-            using (FileStream s = new FileStream(path, FileMode.Open))
-            {
-                root = (UIElement)XamlReader.Load(s);
-            }
+            StreamReader sr = new StreamReader(path);
+            StackPanel root = XamlReader.Load(sr.BaseStream) as StackPanel;
+
+            //UIElement item = (UIElement)(XamlReader.Parse(componentCode));
 
             ChildWindow child = new ChildWindow();
-            child.Preview = (Grid)root;
+            //child.Preview.Children.Add(item);
+            child.Preview = root;
             child.ShowDialog();
+        }
+
+        internal static string StartHTML()
+        {
+            return "<!DOCTYPE html><html><head></head><body>";
+        }
+
+        internal static string EndHTML()
+        {
+            return "</body></html>";
+        }
+
+        internal static string StartWPF()
+        {
+            return "<StackPanel xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\">";
+        }
+
+        internal static string EndWPF()
+        {
+            return "</StackPanel>";
         }
     }
 }
