@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FactoryLibrary.WPF
+namespace FactoryLibrary.HTML
 {
-    public class WPFTextBoxFactory : ComponentFactory
+    public class HTMLTextBox : HTMLComponentFactory
     {
-        public WPFTextBoxFactory(int height, int width, int leftMargin, int topMargin, string content)
+        public HTMLTextBox(int height, int width, int leftMargin, int topMargin, string content)
         {
             Height = height;
             Width = width;
@@ -19,17 +19,15 @@ namespace FactoryLibrary.WPF
 
         public override string GenerateCode()
         {
-            string code = $"<TextBox " +
-                $"Text=\"{Content}\" " +
-                $"Height=\"{Height}\" " +
-                $"Width=\"{Width}\" " +
-                $"Margin=\"{LeftMargin} {TopMargin} 0 0\"/>";
+            string code = $"<input type=\"text\"" +
+                $"value=\"{Content}\" " +
+                $"style=\"Height:{Height}px;Width:{Width}px;Margin:{TopMargin}px 0px 0px {LeftMargin}px\"/> ";
             return code;
         }
 
         public override string ToString()
         {
-            return "WPF TextBox";
+            return "HTML TextBox";
         }
     }
 }

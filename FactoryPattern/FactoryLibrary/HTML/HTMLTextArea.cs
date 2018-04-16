@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace FactoryLibrary.HTML
 {
-    public class HTMLButtonFactory : ComponentFactory
+    public class HTMLTextArea : HTMLComponentFactory
     {
-        public HTMLButtonFactory(int height, int width, int leftMargin, int topMargin, string content)
+        public HTMLTextArea(int height, int width, int leftMargin, int topMargin, string content)
         {
             Height = height;
             Width = width;
@@ -19,17 +19,18 @@ namespace FactoryLibrary.HTML
 
         public override string GenerateCode()
         {
-            string code = $"<button " +
-                $"type=\"button\"" +
-                $"style=\"Height:{Height}px;Width:{Width}px\" " +
-                $"Margin=\"{TopMargin}px 0px 0px {LeftMargin}px\">" +
-                $"{Content}</button>";
+            string code = $"<textarea " +
+                $"rows=\"{Height}px\" " +
+                $"cols=\"{Width}px\" " +
+                $"style=\"Margin:{TopMargin}px 0px 0px {LeftMargin}px\"> " +
+                $"{Content}" +
+                $"</textarea>";
             return code;
         }
 
         public override string ToString()
         {
-            return "HTML Button";
+            return "HTML TextArea";
         }
     }
 }

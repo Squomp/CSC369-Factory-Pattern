@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace FactoryLibrary.HTML
 {
-    public class HTMLTextBoxFactory : ComponentFactory
+    public class HTMLLabel : HTMLComponentFactory
     {
-        public HTMLTextBoxFactory(int height, int width, int leftMargin, int topMargin, string content)
+        public HTMLLabel(int height, int width, int leftMargin, int topMargin, string content)
         {
             Height = height;
             Width = width;
@@ -19,17 +19,15 @@ namespace FactoryLibrary.HTML
 
         public override string GenerateCode()
         {
-            string code = $"<input type=\"text\"" +
-                $"value=\"{Content}\" " +
-                $"Height=\"{Height}px\" " +
-                $"Width=\"{Width}px\" " +
-                $"Margin=\"{TopMargin}px 0px 0px {LeftMargin}px\">";
+            string code = $"<label " +
+                $"style=\"Height:{Height}px;Width:{Width}px;Margin:{TopMargin}px 0px 0px {LeftMargin}px\"> " +
+                $"{Content}</label>";
             return code;
         }
 
         public override string ToString()
         {
-            return "HTML TextBox";
+            return "HTML Label";
         }
     }
 }

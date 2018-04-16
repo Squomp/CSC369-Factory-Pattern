@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace FactoryPattern
 {
-    public enum WPFComponents
+    public enum Components
     {
-        Label, TextBox
+        TextBox, TextArea, Label, Button
     }
 }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace FactoryLibrary.WPF
 {
-    public class WPFLabelFactory : ComponentFactory
+    public class WPFLabel : WPFComponentFactory
     {
-        public WPFLabelFactory(int height, int width, int leftMargin, int topMargin, string content)
+        public WPFLabel(int height, int width, int leftMargin, int topMargin, string content)
         {
             Height = height;
             Width = width;
