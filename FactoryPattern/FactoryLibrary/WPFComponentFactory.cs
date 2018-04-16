@@ -55,7 +55,7 @@ namespace FactoryLibrary
             {
                 w.Write(componentCode);
             }
-
+            
             StreamReader sr = new StreamReader(path);
             StackPanel root = XamlReader.Load(sr.BaseStream) as StackPanel;
 

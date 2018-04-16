@@ -61,7 +61,8 @@ namespace FactoryPattern
             else if (Language.SelectedItem.Equals(Languages.WPF))
             {
                 WPFComponentFactory f = new WPFComponentFactory();
-                comps.Add(f.CreateComponent((Components)Component.SelectedItem, height, width, left, top, content));
+                Components ec = (Components)Enum.Parse(typeof(Components), Component.SelectedItem.ToString());
+                comps.Add(f.CreateComponent(ec, height, width, left, top, content));
             }
             ComponentList.ItemsSource = comps;
         }
