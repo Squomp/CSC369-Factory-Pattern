@@ -37,7 +37,8 @@ namespace FactoryPattern
 
             ChildWindow child = new ChildWindow();
             //child.Preview.Children.Add(item);
-            child.Preview = root;
+            //child.Preview = root;
+            child.Content = root;
             child.ShowDialog();
         }
 
